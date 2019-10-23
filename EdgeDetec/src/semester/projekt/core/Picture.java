@@ -186,7 +186,7 @@ public class Picture implements ActionListener {
     public void setOriginLowerLeft() {
         isOriginUpperLeft = false;
     }
-
+//Yoh 
     /**
      * Displays the picture in a window on the screen.
      */
