@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package semester.projekt;
+package semester.projekt.core;
 
 import java.awt.Color;
 import java.awt.FileDialog;
@@ -432,5 +432,5 @@ public class Picture implements ActionListener {
     public BufferedImage getImage() {
         return image;
     }
-
+    
 }

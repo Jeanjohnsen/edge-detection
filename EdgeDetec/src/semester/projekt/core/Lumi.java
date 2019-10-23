@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package semester.projekt;
+package semester.projekt.core;
 
 import java.awt.Color;
 import java.io.File;
@@ -15,7 +15,6 @@ public class Lumi {
     }
 
     // return the monochrome luminance of given color
-    @Deprecated
     public static double lum(Color color) {
         return intensity(color);
     }
