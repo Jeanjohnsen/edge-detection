@@ -18,7 +18,7 @@ import semester.projekt.core.EdgeDetector;
  *  
  * 
  */
-public class Starter 
+/*public class Starter 
 {
         
         public static void main(String[] args) throws IOException, Exception 
@@ -49,6 +49,7 @@ public class Starter
         *   This method takes the "sobel" file created by the main method
         *   and encodes it to a Base64 string https://da.wikipedia.org/wiki/Base64
         */
+/*
         private static String encodeFile(File file) throws Exception
         {
         FileInputStream fileInputStreamReader = new FileInputStream(file);
@@ -58,3 +59,4 @@ public class Starter
         return new String(Base64.getEncoder().encode(bytes), "UTF-8");
         }
 }
+*/
