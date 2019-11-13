@@ -114,27 +114,32 @@ public final class Starter
         semester.projekt.core.EdgeDetector con = new semester.projekt.core.EdgeDetector();
 
         // __INIT__ GUI
-        SwingUtilities.invokeLater(() -> {
+        SwingUtilities.invokeLater(() -> 
+        {
             
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileFilter(new FileNameExtensionFilter("Images", "jpg", "gif", "png"));
-            while (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                try {
+            while (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) 
+            {
+                try 
+                {
                     File f = fileChooser.getSelectedFile();
                     final BufferedImage image = ImageIO.read(f);
-                    if (image == null) {
+                    if (image == null) 
+                    {
                         throw new IllegalArgumentException(f + " is not a valid image.");
                     }
-                    ImageIO.write(con.getBufferedImage(), "png", f);
                     final String ascii = new Starter().conv(image);
                     final JTextArea textArea = new JTextArea(ascii, image.getHeight(), image.getWidth());
-                    textArea.setFont(new Font("Monospaced", Font.BOLD, 5));
+                    textArea.setFont(new Font("Monospaced", Font.BOLD, 1));
                     textArea.setEditable(false);
                     final JDialog dialog = new JOptionPane(new JScrollPane(textArea), JOptionPane.PLAIN_MESSAGE).createDialog(Starter.class.getName());
                     dialog.setResizable(true);
                     dialog.setVisible(true);
                 
-                } catch (Exception e) {
+                } 
+                catch (Exception e) 
+                {
                     JOptionPane.showMessageDialog(null, e.toString(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }

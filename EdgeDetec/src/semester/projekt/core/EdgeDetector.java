@@ -14,8 +14,7 @@ import java.io.File;
 
 public class EdgeDetector extends Lumi {
 
-    Scanner ne1 = new Scanner(System.in);
-    String filename = ne1.nextLine();
+    String filename;
     RenderedImage getImage;
 
     /**
