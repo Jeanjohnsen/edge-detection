@@ -6,11 +6,9 @@ package semester.projekt.core;
 *
 */
 
-import java.util.*;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
-import java.io.File;
 
 public class EdgeDetector extends Lumi {
 
@@ -28,13 +26,13 @@ public class EdgeDetector extends Lumi {
     }
 
 
-    private int binaryTruncate(int a) {
-        if (a < 127) { 
-            return 0;
-        } else {
-            return 255;
-        }
-    }
+//    private int binaryTruncate(int a) {
+//        if (a < 127) { 
+//            return 0;
+//        } else {
+//            return 255;
+//        }
+//    }
 
     public BufferedImage getBufferedImage() {
 
