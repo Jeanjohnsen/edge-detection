@@ -11,16 +11,11 @@ import java.io.File;
 
 public class Lumi {
 
-    private void setLum(Color color) {
-        this.setLum(color);
-    }
-
-    // return the monochrome luminance of given color
+    
     public static double lum(Color color) {
         return intensity(color);
     }
 
-    // return the monochrome luminance of given color
     public static double intensity(Color color) {
         int r = color.getRed();
         int g = color.getGreen();

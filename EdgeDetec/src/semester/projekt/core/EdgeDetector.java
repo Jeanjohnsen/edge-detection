@@ -14,58 +14,44 @@ import java.io.File;
 
 public class EdgeDetector extends Lumi {
 
-    String filename;
-    RenderedImage getImage;
+    private String filename;
+    private RenderedImage getImage;
 
-    /**
-     *
-     * @param imagePath Path of the image to perform edgedetection on.
-     */
-    
-    
-    // Angiver hvor meget pixlene er tilstede. 0 = ikke tilstede, 255 = helt tilstede. 
     private int truncate(int a) {
-        if (a < 127) { // a= transperency altså gennemsigtigheden for pixlen. 
-            return 0; // Hvis pixlene er mindre end halv tilstede, så er pixlen der ikke. 
+        if (a < 127) { 
+            return 0;  
         } else if (a >= 255) {
-            return 255; // Hvis pixlene er helt til stede vil pixlen være meget mørk. 
+            return 255; 
         } else {
-            return a; // Hvis pixlen er større end halvdelen vil den være tilstede men være meget lav. Eg. hvis den er = 129 vil pixlen være meget svag. 
+            return a; 
         }
     }
 
-    // a = transperency (gennemsigtigheden) 
+
     private int binaryTruncate(int a) {
-        if (a < 127) { // Gennemsigtigheden er der enten hel eller eller slet et. Dette er kun nødvendigt hvis vi vælger at bruge denne her metode i stedet for metoden ovenover.
+        if (a < 127) { 
             return 0;
         } else {
             return 255;
         }
     }
 
-    /**
-     * This method performs edge-detection of the image on the path provided to
-     * the constructor, and returns a BufferedImage representation of the
-     * result.
-     *
-     * @return A BufferedImage-object representation of the image provided.
-     */
     public BufferedImage getBufferedImage() {
 
-        int[][] filter1 = { // Sobel på x-aksen i edge 
+        int[][] filter1 = { 
             {-1, 0, 1},
             {-2, 0, 2},
             {-1, 0, 1}
         };
 
-        int[][] filter2 = { // Sobel på y-aksen i edge 
+        int[][] filter2 = { 
             {1, 2, 1},
             {0, 0, 0},
             {-1, -2, -1}
         };
 
-        // Picture0  hvor 0.0 er ud i kanten på papiret og hvor picture1 er med en kant inde i papiret. 
-        Picture picture0 = new Picture(filename);
+        
+        Picture picture0 = new Picture(getFilename());
         int width = picture0.width() - 2;
         int height = picture0.height() - 2;
         Picture picture1 = new Picture(width, height);
@@ -73,7 +59,7 @@ public class EdgeDetector extends Lumi {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
 
-                // get 3-by-3 array of colors in neighborhood
+               
                 int[][] gray = new int[3][3];
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
@@ -98,6 +84,34 @@ public class EdgeDetector extends Lumi {
         }
 
         return picture1.getImage();
+    }
+
+    /**
+     * @return the filename
+     */
+    public String getFilename() {
+        return filename;
+    }
+
+    /**
+     * @param filename the filename to set
+     */
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    /**
+     * @return the getImage
+     */
+    public RenderedImage getGetImage() {
+        return getImage;
+    }
+
+    /**
+     * @param getImage the getImage to set
+     */
+    public void setGetImage(RenderedImage getImage) {
+        this.getImage = getImage;
     }
 
 }

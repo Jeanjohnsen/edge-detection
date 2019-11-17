@@ -25,26 +25,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-/**
- * This class provides methods for manipulating individual pixels of an image.
- * The original image can be read from a {@code .jpg}, {@code .gif}, or
- * {@code .png} file or the user can create a blank image of a given size. This
- * class includes methods for displaying the image in a window on the screen or
- * saving it to a file.
- * <p>
- * Pixel (<em>col</em>, <em>row</em>) is column <em>col</em> and row
- * <em>row</em>. By default, the origin (0, 0) is the pixel in the top-left
- * corner, which is a common convention in image processing. The method
- * {@code setOriginLowerLeft()} change the origin to the lower left.
- * <p>
- * For additional documentation, see
- * <a href="http://introcs.cs.princeton.edu/31datatype">Section 3.1</a> of
- * <i>Computer Science: An Interdisciplinary Approach</i>
- * by Robert Sedgewick and Kevin Wayne.
- *
- * @author Robert Sedgewick
- * @author Kevin Wayne
- */
+
 public class Picture implements ActionListener {
 
     private BufferedImage image;               // the rasterized image
@@ -53,15 +34,7 @@ public class Picture implements ActionListener {
     private boolean isOriginUpperLeft = true;  // location of origin
     private final int width, height;           // width and height
 
-    /**
-     * Initializes a blank {@code width}-by-{@code height} picture, with
-     * {@code width} columns and {@code height} rows, where each pixel is black.
-     *
-     * @param width the width of the picture
-     * @param height the height of the picture
-     * @throws IllegalArgumentException if {@code width} is negative
-     * @throws IllegalArgumentException if {@code height} is negative
-     */
+    
     public Picture(int width, int height) {
         if (width < 0) {
             throw new IllegalArgumentException("width must be nonnegative");
@@ -75,12 +48,6 @@ public class Picture implements ActionListener {
         // set to TYPE_INT_ARGB to support transparency
     }
 
-    /**
-     * Initializes a new picture that is a deep copy of the argument picture.
-     *
-     * @param picture the picture to copy
-     * @throws IllegalArgumentException if {@code picture} is {@code null}
-     */
     public Picture(Picture picture) {
         if (picture == null) {
             throw new IllegalArgumentException("constructor argument is null");
@@ -97,13 +64,7 @@ public class Picture implements ActionListener {
         }
     }
 
-    /**
-     * Initializes a picture by reading from a file or URL.
-     *
-     * @param filename the name of the file (.png, .gif, or .jpg) or URL.
-     * @throws IllegalArgumentException if cannot read image
-     * @throws IllegalArgumentException if {@code filename} is {@code null}
-     */
+    
     public Picture(String filename) {
         if (filename == null) {
             throw new IllegalArgumentException("constructor argument is null");
@@ -135,13 +96,6 @@ public class Picture implements ActionListener {
         }
     }
 
-    /**
-     * Initializes a picture by reading in a .png, .gif, or .jpg from a file.
-     *
-     * @param file the file
-     * @throws IllegalArgumentException if cannot read image
-     * @throws IllegalArgumentException if {@code file} is {@code null}
-     */
     public Picture(File file) {
         if (file == null) {
             throw new IllegalArgumentException("constructor argument is null");
@@ -160,12 +114,11 @@ public class Picture implements ActionListener {
         filename = file.getName();
     }
 
-    /**
-     * Returns a JLabel containing this picture, for embedding in a JPanel,
-     * JFrame or other GUI widget.
-     *
-     * @return the {@code JLabel}
-     */
+    public Picture() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+ 
     public JLabel getJLabel() {
         if (image == null) {
             return null;         // no image available
@@ -174,26 +127,18 @@ public class Picture implements ActionListener {
         return new JLabel(icon);
     }
 
-    /**
-     * Sets the origin to be the upper left pixel. This is the default.
-     */
     public void setOriginUpperLeft() {
         isOriginUpperLeft = true;
     }
 
-    /**
-     * Sets the origin to be the lower left pixel.
-     */
+  
     public void setOriginLowerLeft() {
         isOriginUpperLeft = false;
     }
-//Yoh 
-    /**
-     * Displays the picture in a window on the screen.
-     */
+
     public void show() {
 
-        // create the GUI for viewing the image if needed
+      
         if (frame == null) {
             frame = new JFrame();
 
@@ -224,20 +169,12 @@ public class Picture implements ActionListener {
         frame.repaint();
     }
 
-    /**
-     * Returns the height of the picture.
-     *
-     * @return the height of the picture (in pixels)
-     */
+ 
     public int height() {
         return height;
     }
 
-    /**
-     * Returns the width of the picture.
-     *
-     * @return the width of the picture (in pixels)
-     */
+  
     public int width() {
         return width;
     }
@@ -254,16 +191,6 @@ public class Picture implements ActionListener {
         }
     }
 
-    /**
-     * Returns the color of pixel ({@code col}, {@code row}) as a
-     * {@link java.awt.Color}.
-     *
-     * @param col the column index
-     * @param row the row index
-     * @return the color of pixel ({@code col}, {@code row})
-     * @throws IllegalArgumentException unless both {@code 0 <= col < width} and
-     * {@code 0 <= row < height}
-     */
     public Color get(int col, int row) {
         validateColumnIndex(col);
         validateRowIndex(row);
@@ -271,18 +198,7 @@ public class Picture implements ActionListener {
         return new Color(rgb);
     }
 
-    /**
-     * Returns the color of pixel ({@code col}, {@code row}) as an {@code int}.
-     * Using this method can be more efficient than {@link #get()} because it
-     * does not create a {@code Color} object.
-     *
-     * @param col the column index
-     * @param row the row index
-     * @return the integer representation of the color of pixel ({@code col},
-     * {@code row})
-     * @throws IllegalArgumentException unless both {@code 0 <= col < width} and
-     * {@code 0 <= row < height}
-     */
+    
     public int getRGB(int col, int row) {
         validateColumnIndex(col);
         validateRowIndex(row);
@@ -293,16 +209,7 @@ public class Picture implements ActionListener {
         }
     }
 
-    /**
-     * Sets the color of pixel ({@code col}, {@code row}) to given color.
-     *
-     * @param col the column index
-     * @param row the row index
-     * @param color the color
-     * @throws IllegalArgumentException unless both {@code 0 <= col < width} and
-     * {@code 0 <= row < height}
-     * @throws IllegalArgumentException if {@code color} is {@code null}
-     */
+
     public void set(int col, int row, Color color) {
         validateColumnIndex(col);
         validateRowIndex(row);
@@ -313,15 +220,7 @@ public class Picture implements ActionListener {
         setRGB(col, row, rgb);
     }
 
-    /**
-     * Sets the color of pixel ({@code col}, {@code row}) to given color.
-     *
-     * @param col the column index
-     * @param row the row index
-     * @param rgb the integer representation of the color
-     * @throws IllegalArgumentException unless both {@code 0 <= col < width} and
-     * {@code 0 <= row < height}
-     */
+
     public void setRGB(int col, int row, int rgb) {
         validateColumnIndex(col);
         validateRowIndex(row);
@@ -332,14 +231,7 @@ public class Picture implements ActionListener {
         }
     }
 
-    /**
-     * Returns true if this picture is equal to the argument picture.
-     *
-     * @param other the other picture
-     * @return {@code true} if this picture is the same dimension as
-     * {@code other} and if all pixels have the same color; {@code false}
-     * otherwise
-     */
+
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -367,23 +259,12 @@ public class Picture implements ActionListener {
         return true;
     }
 
-    /**
-     * This operation is not supported because pictures are mutable.
-     *
-     * @return does not return a value
-     * @throws UnsupportedOperationException if called
-     */
+  
     public int hashCode() {
         throw new UnsupportedOperationException("hashCode() is not supported because pictures are mutable");
     }
 
-    /**
-     * Saves the picture to a file in a standard image format. The filetype must
-     * be .png or .jpg.
-     *
-     * @param filename the name of the file
-     * @throws IllegalArgumentException if {@code name} is {@code null}
-     */
+ 
     public void save(String filename) {
         if (filename == null) {
             throw new IllegalArgumentException("argument to save() is null");
@@ -391,12 +272,7 @@ public class Picture implements ActionListener {
         save(new File(filename));
     }
 
-    /**
-     * Saves the picture to a file in a PNG or JPEG image format.
-     *
-     * @param file the file
-     * @throws IllegalArgumentException if {@code file} is {@code null}
-     */
+  
     public void save(File file) {
         if (file == null) {
             throw new IllegalArgumentException("argument to save() is null");
@@ -417,9 +293,6 @@ public class Picture implements ActionListener {
         }
     }
 
-    /**
-     * Opens a save dialog box when the user selects "Save As" from the menu.
-     */
     @Override
     public void actionPerformed(ActionEvent e) {
         FileDialog chooser = new FileDialog(frame,
