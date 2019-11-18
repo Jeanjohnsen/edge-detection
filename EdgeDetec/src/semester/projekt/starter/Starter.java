@@ -75,7 +75,7 @@ public class Starter
 
     }
     
-        /*
+    /*
     *   This method takes the "sobel" file created by the main method
     *   and encodes it to a Base64 string https://da.wikipedia.org/wiki/Base64
     */

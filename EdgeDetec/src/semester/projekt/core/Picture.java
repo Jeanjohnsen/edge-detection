@@ -55,7 +55,7 @@ public class Picture implements ActionListener {
 
         width = picture.width();
         height = picture.height();
-        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         filename = picture.filename;
         for (int col = 0; col < width(); col++) {
             for (int row = 0; row < height(); row++) {
@@ -139,8 +139,8 @@ public class Picture implements ActionListener {
     public void show() {
 
       
-        if (frame == null) {
-            frame = new JFrame();
+        if (getFrame() == null) {
+            setFrame(new JFrame());
 
             JMenuBar menuBar = new JMenuBar();
             JMenu menu = new JMenu("File");
@@ -150,33 +150,33 @@ public class Picture implements ActionListener {
             menuItem1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
             menu.add(menuItem1);
-            frame.setJMenuBar(menuBar);
+            getFrame().setJMenuBar(menuBar);
 
-            frame.setContentPane(getJLabel());
+            getFrame().setContentPane(getJLabel());
             // f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            if (filename == null) {
-                frame.setTitle(width + "-by-" + height);
+            getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            if (getFilename() == null) {
+                getFrame().setTitle(getWidth() + "-by-" + getHeight());
             } else {
-                frame.setTitle(filename);
+                getFrame().setTitle(getFilename());
             }
-            frame.setResizable(false);
-            frame.pack();
-            frame.setVisible(true);
+            getFrame().setResizable(false);
+            getFrame().pack();
+            getFrame().setVisible(true);
         }
 
         // draw
-        frame.repaint();
+        getFrame().repaint();
     }
 
  
     public int height() {
-        return height;
+        return getHeight();
     }
 
   
     public int width() {
-        return width;
+        return getWidth();
     }
 
     private void validateRowIndex(int row) {
@@ -205,7 +205,7 @@ public class Picture implements ActionListener {
         if (isOriginUpperLeft) {
             return image.getRGB(col, row);
         } else {
-            return image.getRGB(col, height - row - 1);
+            return image.getRGB(col, getHeight() - row - 1);
         }
     }
 
@@ -227,7 +227,7 @@ public class Picture implements ActionListener {
         if (isOriginUpperLeft) {
             image.setRGB(col, row, rgb);
         } else {
-            image.setRGB(col, height - row - 1, rgb);
+            image.setRGB(col, getHeight() - row - 1, rgb);
         }
     }
 
@@ -277,11 +277,11 @@ public class Picture implements ActionListener {
         if (file == null) {
             throw new IllegalArgumentException("argument to save() is null");
         }
-        filename = file.getName();
-        if (frame != null) {
-            frame.setTitle(filename);
+        setFilename(file.getName());
+        if (getFrame() != null) {
+            getFrame().setTitle(getFilename());
         }
-        String suffix = filename.substring(filename.lastIndexOf('.') + 1);
+        String suffix = getFilename().substring(getFilename().lastIndexOf('.') + 1);
         if ("jpg".equalsIgnoreCase(suffix) || "png".equalsIgnoreCase(suffix)) {
             try {
                 ImageIO.write(image, suffix, file);
@@ -295,7 +295,7 @@ public class Picture implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        FileDialog chooser = new FileDialog(frame,
+        FileDialog chooser = new FileDialog(getFrame(),
                 "Use a .png or .jpg extension", FileDialog.SAVE);
         chooser.setVisible(true);
         if (chooser.getFile() != null) {
@@ -305,6 +305,55 @@ public class Picture implements ActionListener {
 
     public BufferedImage getImage() {
         return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
+
+    /**
+     * @return the frame
+     */
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    /**
+     * @param frame the frame to set
+     */
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
+    }
+
+    /**
+     * @return the filename
+     */
+    public String getFilename() {
+        return filename;
+    }
+
+    /**
+     * @param filename the filename to set
+     */
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    /**
+     * @return the width
+     */
+    public int getWidth() {
+        return width;
+    }
+
+    /**
+     * @return the height
+     */
+    public int getHeight() {
+        return height;
     }
     
 }
