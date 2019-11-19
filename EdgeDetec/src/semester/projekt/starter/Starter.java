@@ -47,7 +47,7 @@ public class Starter
                     ed.setFilename(f.getName());
                     ed.setGetImage(image);
                     BufferedImage buffImg = ed.getBufferedImage();
-                    String ascii = new Ascii(50.0).conv(image);
+                    String ascii = new Ascii(55.0).conv(buffImg);
                     JTextArea textArea = new JTextArea(ascii, image.getHeight(), image.getWidth());
                     textArea.setFont(new Font("Monospaced", Font.BOLD, 1));
                     textArea.setEditable(false);

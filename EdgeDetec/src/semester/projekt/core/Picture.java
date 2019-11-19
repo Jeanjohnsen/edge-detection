@@ -4,8 +4,7 @@ package semester.projekt.core;
 *
 *   IMPORTS!
 *
-*/
-
+ */
 import java.awt.Color;
 import java.awt.FileDialog;
 import java.awt.Toolkit;
@@ -25,7 +24,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-
 public class Picture implements ActionListener {
 
     private BufferedImage image;               // the rasterized image
@@ -34,7 +32,6 @@ public class Picture implements ActionListener {
     private boolean isOriginUpperLeft = true;  // location of origin
     private final int width, height;           // width and height
 
-    
     public Picture(int width, int height) {
         if (width < 0) {
             throw new IllegalArgumentException("width must be nonnegative");
@@ -64,7 +61,6 @@ public class Picture implements ActionListener {
         }
     }
 
-    
     public Picture(String filename) {
         if (filename == null) {
             throw new IllegalArgumentException("constructor argument is null");
@@ -118,7 +114,6 @@ public class Picture implements ActionListener {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
- 
     public JLabel getJLabel() {
         if (image == null) {
             return null;         // no image available
@@ -131,14 +126,12 @@ public class Picture implements ActionListener {
         isOriginUpperLeft = true;
     }
 
-  
     public void setOriginLowerLeft() {
         isOriginUpperLeft = false;
     }
 
     public void show() {
 
-      
         if (getFrame() == null) {
             setFrame(new JFrame());
 
@@ -169,12 +162,10 @@ public class Picture implements ActionListener {
         getFrame().repaint();
     }
 
- 
     public int height() {
         return getHeight();
     }
 
-  
     public int width() {
         return getWidth();
     }
@@ -198,7 +189,6 @@ public class Picture implements ActionListener {
         return new Color(rgb);
     }
 
-    
     public int getRGB(int col, int row) {
         validateColumnIndex(col);
         validateRowIndex(row);
@@ -208,7 +198,6 @@ public class Picture implements ActionListener {
             return image.getRGB(col, getHeight() - row - 1);
         }
     }
-
 
     public void set(int col, int row, Color color) {
         validateColumnIndex(col);
@@ -220,7 +209,6 @@ public class Picture implements ActionListener {
         setRGB(col, row, rgb);
     }
 
-
     public void setRGB(int col, int row, int rgb) {
         validateColumnIndex(col);
         validateRowIndex(row);
@@ -230,7 +218,6 @@ public class Picture implements ActionListener {
             image.setRGB(col, getHeight() - row - 1, rgb);
         }
     }
-
 
     public boolean equals(Object other) {
         if (other == this) {
@@ -259,12 +246,10 @@ public class Picture implements ActionListener {
         return true;
     }
 
-  
     public int hashCode() {
         throw new UnsupportedOperationException("hashCode() is not supported because pictures are mutable");
     }
 
- 
     public void save(String filename) {
         if (filename == null) {
             throw new IllegalArgumentException("argument to save() is null");
@@ -272,7 +257,6 @@ public class Picture implements ActionListener {
         save(new File(filename));
     }
 
-  
     public void save(File file) {
         if (file == null) {
             throw new IllegalArgumentException("argument to save() is null");
@@ -355,5 +339,5 @@ public class Picture implements ActionListener {
     public int getHeight() {
         return height;
     }
-    
+
 }
