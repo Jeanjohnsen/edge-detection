@@ -47,6 +47,7 @@ public class Starter
                     ed.setFilename(f.getName());
                     ed.setGetImage(image);
                     BufferedImage buffImg = ed.getBufferedImage();
+                    buffImg.getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
                     String ascii = new Ascii(55.0).conv(buffImg);
                     JTextArea textArea = new JTextArea(ascii, image.getHeight(), image.getWidth());
                     textArea.setFont(new Font("Monospaced", Font.BOLD, 1));

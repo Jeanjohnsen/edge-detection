@@ -7,6 +7,7 @@ package semester.projekt.core;
 */
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 
@@ -77,7 +78,6 @@ public class EdgeDetector extends Lumi {
                 int magnitude = 255 - truncate((int) Math.sqrt(gray1 * gray1 + gray2 * gray2));
                 Color grayscale = new Color(magnitude, magnitude, magnitude);
                 picture1.set(x, y, grayscale);
-
             }
         }
 
